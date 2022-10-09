@@ -17,6 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
  class OnlineViewModel @Inject constructor(private val networkRepository: NetworkRepository) : ViewModel() {
 
+    private val query=MutableLiveData<String>("")
     private val _topHeadlines = MutableLiveData<DataHandler<NewResponse>>()
     val topHeadlines: LiveData<DataHandler<NewResponse>> = _topHeadlines
 
@@ -26,6 +27,10 @@ import javax.inject.Inject
             val response = networkRepository.getTopHeadlines(COUNTRY_CODE, API_KEY)
             _topHeadlines.postValue(handleResponse(response))
         }
+    }
+
+    fun setQuery(s:String){
+        query.postValue(s)
     }
 
     private fun handleResponse(response: Response<NewResponse>): DataHandler<NewResponse> {

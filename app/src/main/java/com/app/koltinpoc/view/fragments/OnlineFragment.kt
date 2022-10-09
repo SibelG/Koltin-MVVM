@@ -2,6 +2,7 @@ package com.app.koltinpoc.view.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -30,7 +31,7 @@ class OnlineFragment : Fragment(R.layout.fragment_online) {
         binding = FragmentOnlineBinding.bind(view)
         init()
 
-        viewModel.topHeadlines.observe(viewLifecycleOwner, { dataHandler ->
+        viewModel.topHeadlines.observe(viewLifecycleOwner) { dataHandler ->
             when (dataHandler) {
                 is DataHandler.SUCCESS -> {
                     binding.progressBar.visibility = View.GONE
@@ -47,8 +48,23 @@ class OnlineFragment : Fragment(R.layout.fragment_online) {
                 }
             }
 
+        }
+
+        binding.movieSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    viewModel.setQuery(it)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
         })
         viewModel.getTopHeadlines()
+
 
     }
 
