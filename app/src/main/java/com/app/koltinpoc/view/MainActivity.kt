@@ -28,22 +28,23 @@ class MainActivity : AppCompatActivity() {
         navigationHost =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
         bottomNavView = navigationHost.navController
-        bottomNav=findViewById(R.id.bottomNavigationView)
+        bottomNav = findViewById(R.id.bottom_nav_view)
         //bottomNavView=findNavController(R.id.nav_host_fragment_container)
 
         bottomNav.setupWithNavController(bottomNavView)
 
-        appBarConfiguration = AppBarConfiguration(
+        /*appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.breakingNewsFragment,
                 R.id.savedNewsFragment
 
             )
-        )
-        setupActionBarWithNavController(bottomNavView, appBarConfiguration)
-    }
+        )*/
+        //setupActionBarWithNavController(bottomNavView, appBarConfiguration)
 
-    override fun onSupportNavigateUp(): Boolean {
+
+        /*override fun onSupportNavigateUp(): Boolean {
         return bottomNavView.navigateUp(appBarConfiguration)
+    }*/
     }
 }
