@@ -12,6 +12,8 @@ import javax.inject.Inject
 
 class NewsAdapter @Inject constructor() : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
+    private var oldData = emptyList<Article>()
+
     inner class ViewHolder(val binding: AdapterNewsItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -53,7 +55,10 @@ class NewsAdapter @Inject constructor() : RecyclerView.Adapter<NewsAdapter.ViewH
         }
 
     }
-
+    fun setData(newData: List<Article>){
+        oldData = newData
+        notifyDataSetChanged()
+    }
     override fun getItemCount(): Int {
         return differ.currentList.size
     }

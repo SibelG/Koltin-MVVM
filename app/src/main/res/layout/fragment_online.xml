@@ -6,28 +6,87 @@
     android:layout_height="match_parent"
     tools:context=".view.fragments.OnlineFragment">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/movie_toolbar"
+    <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/purple_700"
-        app:titleTextColor="@color/white"
         tools:ignore="MissingConstraints">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn1"
+                android:text="Business"
+                android:textSize="12dp"
+                android:padding="6dp"
+                android:layout_margin="6dp"
+                ></Button>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn2"
+                android:text="Entertainment"
+                android:textSize="12dp"
+                android:padding="6dp"
+                android:layout_margin="6dp"
+                ></Button>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn3"
+                android:text="General"
+                android:textSize="12dp"
+                android:padding="6dp"
+                android:layout_margin="6dp"
+                ></Button>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn4"
+                android:text="Health"
+                android:textSize="12dp"
+                android:padding="6dp"
+                android:layout_margin="6dp"
+                ></Button>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn5"
+                android:text="Science"
+                android:textSize="12dp"
+                android:padding="6dp"
+                android:layout_margin="6dp"
+                ></Button>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn6"
+                android:text="Sports"
+                android:textSize="10dp"
+                android:padding="6dp"
+                android:layout_margin="6dp"
+                ></Button>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn7"
+                android:text="Technology"
+                android:textSize="10dp"
+                android:padding="6dp"
+                android:layout_margin="6dp"
+                ></Button>
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/movie_search"
-            style="@style/Widget.AppCompat.SearchView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end" />
 
-    </com.google.android.material.appbar.MaterialToolbar>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_below="@+id/movie_toolbar"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="70dp"

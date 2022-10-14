@@ -1,27 +1,15 @@
 package com.app.koltinpoc.db
 
 import androidx.room.TypeConverter
-import com.app.koltinpoc.db.entity.SourceEntity
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import com.app.koltinpoc.model.Source
 
 class Converter {
-
-    val gson = Gson()
-
     @TypeConverter
-    fun toSourceEntityToString(sourceEntity: SourceEntity): String {
-
-        val type = object : TypeToken<SourceEntity>() {}.type
-        return gson.toJson(sourceEntity, type)
+    fun fromSource(source: Source) :String? {
+        return source.name
     }
-
     @TypeConverter
-    fun fromStringToSourceEntity(string: String): SourceEntity {
-
-        val type = object : TypeToken<SourceEntity>() {}.type
-        return gson.fromJson<SourceEntity>(string, type)
-
+    fun toSource(name: String) : Source {
+        return Source(name, name)
     }
-
 }

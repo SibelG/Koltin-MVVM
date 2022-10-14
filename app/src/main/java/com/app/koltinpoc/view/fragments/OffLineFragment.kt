@@ -55,3 +55,5 @@ class OffLineFragment : Fragment(R.layout.fragment_offline) {
     }
 
 }
+
+
