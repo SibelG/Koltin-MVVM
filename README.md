@@ -1,4 +1,6 @@
 # Koltin-MVVM-NewsApp
 MVVM,Navigation Component, Kotlin Coroutines, Dagger HILT, Room, Retrofit, View Binding
-![image](https://user-images.githubusercontent.com/46397935/195884518-b62bb133-f44e-4115-842b-a234943df617.png)
-![image](https://user-images.githubusercontent.com/46397935/195884638-366b4ba2-3d93-45e0-90ac-15806669365d.png)
+![image](https://user-images.githubusercontent.com/46397935/195885292-f7af9e06-1468-429e-81db-c49b15f2da61.png)
+
+![image](https://user-images.githubusercontent.com/46397935/195885128-4d622d49-5275-4401-9f2c-637da9aaab31.png)
+
