@@ -16,6 +16,7 @@ import com.app.koltinpoc.utils.Constants.LANGUAGE
 import com.app.koltinpoc.utils.Constants.SPORT
 import com.app.koltinpoc.utils.Constants.TECH
 import com.app.koltinpoc.utils.DataHandler
+import com.bumptech.glide.load.engine.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -24,11 +25,16 @@ import javax.inject.Inject
 @HiltViewModel
  class OnlineViewModel @Inject constructor(private val networkRepository: NetworkRepository) : ViewModel() {
 
-    private val query=MutableLiveData<String>("")
     private val _topHeadlines = MutableLiveData<DataHandler<NewResponse>>()
     val topHeadlines: LiveData<DataHandler<NewResponse>> = _topHeadlines
     private val _topCategories = MutableLiveData<DataHandler<NewResponse>>()
     val topCategories: LiveData<DataHandler<NewResponse>> = _topCategories
+    //val searchNews: MutableLiveData<Resource<NewResponse>> = MutableLiveData()
+    var searchNewsPage = 1
+    var searchNewsResponse: NewResponse? = null
+    private val _searchNews = MutableLiveData<DataHandler<NewResponse>>()
+    val searchNews: LiveData<DataHandler<NewResponse>> = _searchNews
+
 
     fun getTopHeadlines() {
         _topHeadlines.postValue(DataHandler.LOADING())
@@ -44,10 +50,30 @@ import javax.inject.Inject
             _topCategories.postValue(handleResponse(response))
         }
     }
-
-    fun setQuery(s:String){
-        query.postValue(s)
+    fun searchNews(searchQuery: String) = viewModelScope.launch {
+        _searchNews.postValue(DataHandler.LOADING())
+        val response = networkRepository.searchNews(searchQuery, searchNewsPage)
+        _searchNews.postValue(handleSearchNewsResponse(response))
     }
+
+
+    private fun handleSearchNewsResponse(response: Response<NewResponse>): DataHandler<NewResponse> {
+        if (response.isSuccessful) {
+            response.body()?.let { resultResponse ->
+                searchNewsPage++
+                if (searchNewsResponse == null) {
+                    searchNewsResponse = resultResponse
+                } else {
+                    val olArticles = searchNewsResponse?.articles
+                    val newArticles = resultResponse.articles
+                    olArticles?.addAll(newArticles)
+                }
+                return DataHandler.SUCCESS(searchNewsResponse ?: resultResponse)
+            }
+        }
+        return DataHandler.ERROR(message = response.errorBody().toString())
+    }
+
 
     private fun handleResponse(response: Response<NewResponse>): DataHandler<NewResponse> {
         if (response.isSuccessful) {
@@ -57,33 +83,6 @@ import javax.inject.Inject
         }
         return DataHandler.ERROR(message = response.errorBody().toString())
     }
-    /*private suspend fun createRequest(): NewResponse {
-        Constants.apply {
-            return when (category) {
-                ALL -> {
-                    networkRepository.getTopHeadlines(COUNTRY_CODE, API_KEY)
-                }
-                HEALTH -> {
-                    networkRepository.getCategory(API_KEY, LANGUAGE, HEALTH)
-                }
-                TECH -> {
-                    networkRepository.getCategory(API_KEY, LANGUAGE, TECH)
-                }
-                ENTERTAINMENT -> {
-                    networkRepository.getCategory(API_KEY, LANGUAGE, ENTERTAINMENT)
-                }
-                BUSINESS -> {
-                    networkRepository.getCategory(API_KEY, LANGUAGE, BUSINESS)
-                }
-                GENERAL -> {
-                    networkRepository.getCategory(API_KEY, LANGUAGE, GENERAL)
-                }
-                else -> {
-                    networkRepository.getCategory(API_KEY, LANGUAGE, SPORT)
-                }
-            }
-        }
-    }*/
 
 
 }

@@ -4,11 +4,11 @@ object Constants {
 
     val API_KEY = "6953a7421bb749c589e687746c85eee8" //GET YOUR API KEY BY SIGNING to https://newsapi.org
     val BASE_URL = "https://newsapi.org/"
-    val COUNTRY_CODE = "in"
-    const val PAGE_SIZE = 20
-    const val STARTING_PAGE_INDEX = 1
+    val COUNTRY_CODE = "tr"
+    const val SEARCH_NEWS_TIME_DELAY = 500L
+    const val QUERY_PAGE_SIZE = 20
     const val MODEL = "ARTICLE_MODEL"
-    const val LANGUAGE = "en"
+    const val LANGUAGE = "tr"
     const val TECH = "technology"
     const val SPORT = "sports"
     const val HEALTH = "health"

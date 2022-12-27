@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_onlineFragment_to_articleDetailsFragment"
             app:destination="@id/articleDetailsFragment" />
+        <action
+            android:id="@+id/action_onlineFragment_to_searchNewsFragment2"
+            app:destination="@id/searchNewsFragment" />
 
     </fragment>
     <fragment
@@ -30,5 +33,13 @@
             android:name="article_data"
             app:argType="com.app.koltinpoc.model.Article"
             app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchNewsFragment"
+        android:name="com.app.koltinpoc.view.fragments.SearchNewsFragment"
+        android:label="SearchNewsFragment" >
+        <action
+            android:id="@+id/action_searchNewsFragment_to_articleDetailsFragment"
+            app:destination="@id/articleDetailsFragment" />
     </fragment>
 </navigation>

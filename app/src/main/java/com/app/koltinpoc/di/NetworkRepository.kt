@@ -17,7 +17,9 @@ class NetworkRepository @Inject constructor(
     suspend fun getCategory(apiKey: String, language:String, category: String): Response<NewResponse> {
         return topHeadlinesApi.getCategory(apiKey,language, category)
     }
-
+    suspend fun searchNews(searchQuery: String, pageNumber: Int): Response<NewResponse>  {
+        return topHeadlinesApi.searchNews(searchQuery, pageNumber)
+    }
 
 
 

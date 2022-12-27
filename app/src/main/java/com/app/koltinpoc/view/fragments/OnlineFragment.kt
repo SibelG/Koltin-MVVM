@@ -25,7 +25,7 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class OnlineFragment :Fragment(R.layout.fragment_online),View.OnClickListener, SearchView.OnQueryTextListener {
+class OnlineFragment :Fragment(R.layout.fragment_online),View.OnClickListener {
 
     private lateinit var binding: FragmentOnlineBinding
 
@@ -90,44 +90,12 @@ class OnlineFragment :Fragment(R.layout.fragment_online),View.OnClickListener, S
 
 
 
-        //viewModel.getTopHeadlines()
+        viewModel.getTopHeadlines()
         //viewModel.getTopCategories("general")
 
 
     }
-    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
-        menuInflater.inflate(R.menu.search_menu, menu)
 
-        val search = menu?.findItem(R.id.menu_search)
-        val searchView = search?.actionView as? SearchView
-        searchView?.isSubmitButtonEnabled = true
-        searchView?.setOnQueryTextListener(this)
-        super.onCreateOptionsMenu(menu, menuInflater);
-    }
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        // it will triggered when
-        // we submit the written test
-        return true
-    }
-    // this function will triggered when we
-    // write even a single char in search view
-    override fun onQueryTextChange(query: String?): Boolean {
-        if(query != null){
-            searchDatabase(query)
-        }
-        return true
-    }
-    // We have just created this function for searching our database
-    private fun searchDatabase(query: String) {
-        // %" "% because our custom sql query will require that
-        val searchQuery = "%$query%"
-
-        dbRepository.searchDatabase(searchQuery).observe(this) { list ->
-            list.let {
-                newsAdapter.setData(it)
-            }
-        }
-    }
 
     private fun init() {
 
@@ -180,10 +148,6 @@ class OnlineFragment :Fragment(R.layout.fragment_online),View.OnClickListener, S
                 }
             }
     }
-/*val button = v as Button
-val category = button.text.toString()
-/* progressDialog.setTitle("Fetching News Of $category")
-progressDialog.show()*/
-viewModel.getTopCategories(category)*/
+
 }
 
